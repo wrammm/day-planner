@@ -1,8 +1,75 @@
-<label>
-  Name
-  <input aria-label="Name" type="text" [formField]="taskForm.name" />
-</label>
-<input type="number" [formField]="taskForm.estimatedCompletionTime" />
-<input type="datetime-local" [formField]="taskForm.startDaytime" />
-<button (click)="addTask()">Add Task</button>
-<button class="delete-button" [value]="'Delete'" (click)="clearTasks()">Clear Tasks</button>
+<mat-expansion-panel class="add-task-container" [expanded]="panelOpenState()">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon>add_task</mat-icon>
+      Create New Task
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <form class="task-form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Task Name</mat-label>
+      <input matInput [formField]="taskForm.name" placeholder="Enter task name" />
+    </mat-form-field>
+
+    <div class="time-and-date-wrapper">
+      <div class="time-section">
+        <label class="time-label">Estimated Time (minutes)</label>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Or enter custom time</mat-label>
+          <input
+            matInput
+            type="number"
+            [formField]="taskForm.estimatedCompletionTime"
+            placeholder="e.g., 30"
+          />
+        </mat-form-field>
+
+        <div class="chips-container">
+          <mat-chip-set aria-label="Quick time selection">
+            @for (time of commonTimes; track time) {
+              <mat-chip
+                [highlighted]="taskForm.estimatedCompletionTime().value() === time.toString()"
+                (click)="setEstimatedTime(time)"
+              >
+                {{ time }}m
+              </mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+      </div>
+
+      <div class="date-section">
+        <label class="date-label">Start Date & Time</label>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Or enter custom date</mat-label>
+          <input matInput type="datetime-local" [formField]="taskForm.startDaytime" />
+        </mat-form-field>
+
+        <div class="chips-container">
+          <mat-chip-set aria-label="Quick date selection">
+            @for (dateOption of dateOptions; track dateOption.label) {
+              <mat-chip
+                [highlighted]="isDateSelected(dateOption)"
+                (click)="setStartDate(dateOption.daysOffset, dateOption.hours)"
+              >
+                {{ dateOption.label }}
+              </mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <mat-action-row>
+    <button mat-raised-button color="primary" (click)="addTask()">
+      <mat-icon>add</mat-icon>
+      Add Task
+    </button>
+    <button mat-stroked-button color="warn" (click)="clearTasks()">
+      <mat-icon>delete_sweep</mat-icon>
+      Clear All Tasks
+    </button>
+  </mat-action-row>
+</mat-expansion-panel>

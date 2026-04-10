@@ -1,2 +1,38 @@
-<h1 class="small-heading">{{ task()?.name }}</h1>
-<p>Estimated Completion Time: {{ task()?.estimatedCompletionTime }}</p>
+<mat-card class="task-card" [class.completed]="task()?.finished">
+  <mat-card-header class="task-header">
+    <div class="task-header-content">
+      <mat-icon class="task-icon">{{ task()?.finished ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+      <div class="task-info">
+        <mat-card-title [class.finished-text]="task()?.finished">
+          {{ task()?.name }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <mat-icon class="time-icon">schedule</mat-icon>
+          {{ task()?.startDaytime | date: 'short' }}
+        </mat-card-subtitle>
+      </div>
+    </div>
+    <mat-chip-set aria-label="Task status">
+      <mat-chip
+        [highlighted]="task()?.finished"
+        class="status-chip"
+        [attr.aria-label]="task()?.finished ? 'Completed' : 'Pending'"
+      >
+        {{ task()?.finished ? 'Completed' : 'Pending' }}
+      </mat-chip>
+    </mat-chip-set>
+  </mat-card-header>
+
+  <mat-card-content class="task-content">
+    <div class="time-info">
+      <mat-icon>timer</mat-icon>
+      <span>{{ task()?.estimatedCompletionTime }} minutes</span>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="task-actions">
+    <button mat-icon-button color="warn" (click)="removeTask()" matTooltip="Delete task">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

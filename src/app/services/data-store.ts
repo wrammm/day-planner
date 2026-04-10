@@ -30,8 +30,21 @@ export class DataStore {
 
   addTask(task: Task): void {
     const tasks = this.getTasks();
-    tasks.push(task);
+    const newTask: Task = {
+      ...task,
+      id: this.generateId(),
+    };
+    tasks.push(newTask);
     this.setTasks(tasks);
+  }
+
+  removeTask(id: string): void {
+    const tasks = this.getTasks().filter((task) => task.id !== id);
+    this.setTasks(tasks);
+  }
+
+  private generateId(): string {
+    return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   clearTasks(): void {
