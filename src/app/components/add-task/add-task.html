@@ -1,4 +1,7 @@
-<input type="text" [formField]="taskForm.name" />
+<label>
+  Name
+  <input aria-label="Name" type="text" [formField]="taskForm.name" />
+</label>
 <input type="number" [formField]="taskForm.estimatedCompletionTime" />
 <input type="datetime-local" [formField]="taskForm.startDaytime" />
 <button (click)="addTask()">Add Task</button>
