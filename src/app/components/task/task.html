@@ -1,7 +1,9 @@
 <mat-card class="task-card" [class.completed]="task()?.finished">
   <mat-card-header class="task-header">
     <div class="task-header-content">
-      <mat-icon class="task-icon">{{ task()?.finished ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+      <mat-icon class="task-icon">{{
+        task()?.finished ? 'check_circle' : 'radio_button_unchecked'
+      }}</mat-icon>
       <div class="task-info">
         <mat-card-title [class.finished-text]="task()?.finished">
           {{ task()?.name }}
