@@ -1,0 +1,5 @@
+<input type="text" [formField]="taskForm.name" />
+<input type="number" [formField]="taskForm.estimatedCompletionTime" />
+<input type="datetime-local" [formField]="taskForm.startDaytime" />
+<button (click)="addTask()">Add Task</button>
+<button class="delete-button" [value]="'Delete'" (click)="clearTasks()">Clear Tasks</button>
