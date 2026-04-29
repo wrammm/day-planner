@@ -32,12 +32,12 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        run: npm run build -- --base-href="/YOUR_REPO_NAME/"
+        run: npm run build -- --base-href="/Day-Planner/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/YOUR_APP_NAME/browser
+          path: dist/day-planner/browser
 
   deploy:
     environment:
