@@ -1,3 +1,5 @@
-@for (task of tasks(); track $index) {
-  <app-task-view [task]="task"></app-task-view>
-}
+<div class="tasklist">
+  @for (task of tasks(); track $index) {
+    <app-task-view [task]="task"></app-task-view>
+  }
+</div>

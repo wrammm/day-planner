@@ -1,0 +1,13 @@
+.tasklist {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 30px;;
+}
+//mobile
+@media (max-width: 600px) {
+  .tasklist {
+    // one column on small screens
+    width: 100%;
+    grid-template-columns: 100%;
+  }
+}
