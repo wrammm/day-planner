@@ -1,0 +1,15 @@
+<ng-container>
+  <div>
+    @for (item of items; track item.id) {
+      <mat-expansion-panel [style.padding-left.px]="level * 50" [disabled]="!item.children">
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{ item.name }} </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        @if (item.children) {
+          <app-item [items]="item.children" [level]="level + 1"></app-item>
+        }
+      </mat-expansion-panel>
+    }
+  </div>
+</ng-container>
